@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8766ae2a3ebb3cb46b628e1fb9e54989, type: 3}
   m_Name: Question 3
   m_EditorClassIdentifier: 
+  questionText: "\uC5EC\uAE30\uC5D0 \uC9C8\uBB38\uC744 \uC801\uC5B4\uC8FC\uC138\uC6943"
