@@ -17,13 +17,12 @@ public class Quiz : MonoBehaviour
 
         for (int i = 0; i < answerText.Length; i++)
         {
-        answerText[i].text = questions.GetAnswers(i);
-
+            answerText[i].text = questions.GetAnswers(i);
         }
     }
 
     void Update()
     {
-        
+
     }
 }
