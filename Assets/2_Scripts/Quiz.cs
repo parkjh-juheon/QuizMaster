@@ -1,28 +1,33 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] QuestionSo questions;
-    [SerializeField] TextMeshProUGUI[] answerText;
+    //[SerializeField] TextMeshProUGUI[] answerText;
+    [SerializeField] GameObject[] answerButtons;
+    [SerializeField] Sprite defaultAnswerSprite;
+    [SerializeField] Sprite correctAnswerSprite;
     void Start()
     {
         questionText.text = questions.GetQuestion();
 
-        //answerText[0].text = questions.GetAnswers(0);
-        //answerText[1].text = questions.GetAnswers(1);
-        //answerText[2].text = questions.GetAnswers(2);
-        //answerText[3].text = questions.GetAnswers(3);
-
-        for (int i = 0; i < answerText.Length; i++)
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            answerText[i].text = questions.GetAnswers(i);
+            //answerText[i].text = questions.GetAnswers(i);
+            answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = questions.GetAnswers(i);
         }
     }
 
-    void Update()
+    public void OnAnswerButtonClicked(int index)
     {
+        if (index == questions.GetCorrectAnswerIndex())
+        {
+            questionText.text = "정답입니다.";
+            answerButtons[index].GetComponent<Image>().sprite = correctAnswerSprite;
+        }
 
     }
 }
