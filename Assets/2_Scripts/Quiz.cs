@@ -28,6 +28,5 @@ public class Quiz : MonoBehaviour
             questionText.text = "정답입니다.";
             answerButtons[index].GetComponent<Image>().sprite = correctAnswerSprite;
         }
-
     }
 }
