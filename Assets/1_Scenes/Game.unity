@@ -246,6 +246,9 @@ MonoBehaviour:
   - {fileID: 1476590593}
   defaultAnswerSprite: {fileID: -2421234149185767044, guid: b045361bd79f541489c77dcee492c903, type: 3}
   correctAnswerSprite: {fileID: -4659264650518790821, guid: 89e39cbbf3d4eab47bc1f7372b34dc2a, type: 3}
+  timerImge: {fileID: 1408864414}
+  problemTimerSprite: {fileID: -5384725055999689231, guid: 97ae856db14515a47ac1bfd1f05c043b, type: 3}
+  solutionTimerSprite: {fileID: 801340330791846111, guid: 5f124cce360f2364f8fc14dfab1ed464, type: 3}
 --- !u!1001 &458537609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1074,9 +1077,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d3ef211542acc48aa437e264d0dd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  problemTime: 10
-  solutionTime: 3
+  problemTime: 5
+  solutionTime: 2
   isProblemPhase: 1
+  fillAmount: 0
+  loadNextQuestion: 0
 --- !u!4 &1308039742
 Transform:
   m_ObjectHideFlags: 0

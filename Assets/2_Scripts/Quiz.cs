@@ -1,24 +1,61 @@
-using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
+    [Header("질문")]
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] QuestionSo questions;
+
+    [Header("보기")]
     [SerializeField] GameObject[] answerButtons;
+
+    [Header("버튼 색깔")]
     [SerializeField] Sprite defaultAnswerSprite;
     [SerializeField] Sprite correctAnswerSprite;
 
+    [Header("타이머")]
+    [SerializeField] Image timerImge;
+    [SerializeField] Sprite problemTimerSprite;
+    [SerializeField] Sprite solutionTimerSprite;
+    Timer timer;
+    bool chooseAnswer = false;
+
     void Start()
     {
+        timer = FindAnyObjectByType<Timer>();
         GetNextQusetion();
+    }
+
+    private void Update()
+    {
+        timerImge.fillAmount = timer.fillAmount;
+        if (timer.isProblemTime)
+        {
+            timerImge.sprite = problemTimerSprite;
+        }
+        else
+        {
+            timerImge.sprite = solutionTimerSprite;
+
+        }
+
+        if (timer.loadNextQuestion)
+        {
+            timer.loadNextQuestion = false;
+            GetNextQusetion();
+        }
+
+        if (timer.isProblemTime == false && chooseAnswer == false)
+        {
+            DisPlaySolution(-1);
+        }
     }
 
     private void GetNextQusetion()
     {
+        chooseAnswer = false;
         SetButtonState(true);
         OnDisplayQuestion();
         SetDefaultButtonSprit();
@@ -32,9 +69,9 @@ public class Quiz : MonoBehaviour
         }
     }
 
-
     private void OnDisplayQuestion()
     {
+        Debug.Log("DisplayQuestion" + questions.GetQuestion());
         questionText.text = questions.GetQuestion();
 
         for (int i = 0; i < answerButtons.Length; i++)
@@ -45,6 +82,13 @@ public class Quiz : MonoBehaviour
 
     public void OnAnswerButtonClicked(int index)
     {
+        chooseAnswer = true;
+        DisPlaySolution(index);
+        timer.CancelTimer();
+    }
+
+    private void DisPlaySolution(int index)
+    {
         if (index == questions.GetCorrectAnswerIndex())
         {
             questionText.text = "정답입니다.";
@@ -52,7 +96,7 @@ public class Quiz : MonoBehaviour
         }
         else
         {
-            questionText.text = "오답입니다. 아쉬워라" + questions.GetCorrectAnswerIndex();
+            questionText.text = "오답입니다. 아쉬워라 정답은" + questions.GetCorrectAnswerIndex();
         }
         SetButtonState(false);
     }
