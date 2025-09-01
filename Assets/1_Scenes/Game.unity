@@ -1057,7 +1057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1308039742}
-  - component: {fileID: 1308039741}
+  - component: {fileID: 1308039743}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -1065,23 +1065,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1308039741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1308039740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15d3ef211542acc48aa437e264d0dd22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  problemTime: 5
-  solutionTime: 2
-  isProblemPhase: 1
-  fillAmount: 0
-  loadNextQuestion: 0
 --- !u!4 &1308039742
 Transform:
   m_ObjectHideFlags: 0
@@ -1097,6 +1080,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1308039743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308039740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11083dc4b9beb3d4880c4acdf4e5692c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  problemTime: 10
+  solutionTime: 3
+  isProblemTime: 1
+  fillAmount: 0
+  loadNextQuestion: 0
 --- !u!1 &1408864412
 GameObject:
   m_ObjectHideFlags: 0

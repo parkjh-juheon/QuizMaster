@@ -25,7 +25,7 @@ public class Quiz : MonoBehaviour
     void Start()
     {
         timer = FindAnyObjectByType<Timer>();
-        GetNextQusetion();
+        GetNextQuestion();
     }
 
     private void Update()
@@ -44,16 +44,16 @@ public class Quiz : MonoBehaviour
         if (timer.loadNextQuestion)
         {
             timer.loadNextQuestion = false;
-            GetNextQusetion();
+            GetNextQuestion();
         }
 
         if (timer.isProblemTime == false && chooseAnswer == false)
         {
-            DisPlaySolution(-1);
+            DisplaySolution(-1);
         }
     }
 
-    private void GetNextQusetion()
+    private void GetNextQuestion()
     {
         chooseAnswer = false;
         SetButtonState(true);
@@ -83,11 +83,11 @@ public class Quiz : MonoBehaviour
     public void OnAnswerButtonClicked(int index)
     {
         chooseAnswer = true;
-        DisPlaySolution(index);
+        DisplaySolution(index);
         timer.CancelTimer();
     }
 
-    private void DisPlaySolution(int index)
+    private void DisplaySolution(int index)
     {
         if (index == questions.GetCorrectAnswerIndex())
         {
