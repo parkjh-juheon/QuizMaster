@@ -36,15 +36,17 @@ public class Quiz : MonoBehaviour
     {
         timer = FindAnyObjectByType<Timer>();
         ScoerKeeper = FindFirstObjectByType<ScoerKeeper>(); // 먼저 초기화
-        progressber.maxValue = questions.Count;
         progressber.value = 0;
+        progressber.maxValue = questions.Count;
 
         GetNextQuestion();
     }
 
     private void Update()
     {
+        // Timer 이미지 업데이트
         timerImge.fillAmount = timer.fillAmount;
+
         if (timer.isProblemTime)
         {
             timerImge.sprite = problemTimerSprite;
@@ -54,17 +56,29 @@ public class Quiz : MonoBehaviour
             timerImge.sprite = solutionTimerSprite;
         }
 
+        // 다음 문제 불러오기
         if (timer.loadNextQuestion)
         {
-            timer.loadNextQuestion = false;
-            GetNextQuestion();
+            if (questions.Count <= 0)
+            {
+                // 모든 문제를 다 풀면 End 화면 출력
+                GameManager.Instance.ShowEndScreen();
+            }
+            else
+            {
+                // 문제 아직 남아 있으면 다음 문제 불러오기
+                timer.loadNextQuestion = false;
+                GetNextQuestion();
+            }
         }
 
+        // SolutionTime이고 답을 선택하지 않았을 때
         if (timer.isProblemTime == false && chooseAnswer == false)
         {
             DisplaySolution(-1);
         }
     }
+
 
     private void GetNextQuestion()
     {
