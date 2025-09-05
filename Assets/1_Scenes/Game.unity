@@ -244,7 +244,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a87112a793c53934c8e1d50873953a2c, type: 2}
   - {fileID: 11400000, guid: 1fd7699942521224ebc14e0b2694aa49, type: 2}
   - {fileID: 11400000, guid: 4b36965cc3accb342afd4d4523676805, type: 2}
-  - {fileID: 11400000, guid: 18a1d6b9e8e8d26498c210ca82b51004, type: 2}
   answerButtons:
   - {fileID: 482035382}
   - {fileID: 630985620}
