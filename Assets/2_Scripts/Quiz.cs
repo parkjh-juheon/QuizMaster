@@ -25,21 +25,40 @@ public class Quiz : MonoBehaviour
     bool chooseAnswer = false;
 
     [Header("점수")]
-    [SerializeField] TextMeshProUGUI scoerText;
-    ScoerKeeper ScoerKeeper;
+    [SerializeField] TextMeshProUGUI scoreText;
+    ScoerKeeper scoreKeeper;
 
     [Header("바")]
-    [SerializeField] Slider progressber;
-    //public bool isComplete = false;
+    [SerializeField] Slider progressBar;
+
+    bool isGeneratingQuestions = false;
 
     void Start()
     {
-        timer = FindAnyObjectByType<Timer>();
-        ScoerKeeper = FindFirstObjectByType<ScoerKeeper>(); // 먼저 초기화
-        progressber.value = 0;
-        progressber.maxValue = questions.Count;
+        timer = FindFirstObjectByType<Timer>();
+        scoreKeeper = FindFirstObjectByType<ScoerKeeper>();
 
-        GetNextQuestion();
+        if (questions.Count == 0)
+        {
+            GenerateQuestionsIfNeeded();
+        }
+        else
+        {
+            InitializeProgressBar();
+        }
+    }
+
+    private void GenerateQuestionsIfNeeded()
+    {
+        if (isGeneratingQuestions) return;
+        isGeneratingQuestions = true;
+        GameManager.Instance.ShowLoadingScreen();
+    }
+
+    private void InitializeProgressBar()
+    {
+        progressBar.maxValue = questions.Count;
+        progressBar.value = 0;
     }
 
     private void Update()
@@ -59,26 +78,24 @@ public class Quiz : MonoBehaviour
         // 다음 문제 불러오기
         if (timer.loadNextQuestion)
         {
-            if (questions.Count <= 0)
+            if (questions.Count == 0)
             {
-                // 모든 문제를 다 풀면 End 화면 출력
-                GameManager.Instance.ShowEndScreen();
+                GenerateQuestionsIfNeeded();
+                //GameManager.Instance.ShowEndScreen();
             }
             else
             {
-                // 문제 아직 남아 있으면 다음 문제 불러오기
                 timer.loadNextQuestion = false;
                 GetNextQuestion();
             }
         }
 
-        // SolutionTime이고 답을 선택하지 않았을 때
+        // SolutionTime인데 답을 선택하지 않았을 때
         if (timer.isProblemTime == false && chooseAnswer == false)
         {
             DisplaySolution(-1);
         }
     }
-
 
     private void GetNextQuestion()
     {
@@ -88,13 +105,14 @@ public class Quiz : MonoBehaviour
             return;
         }
 
+        GameManager.Instance.ShowQuizScene();
         chooseAnswer = false;
         SetButtonState(true);
-        SetDefaultButtonSprites();  // 버튼 초기화 먼저
-        GetRandomQuestion();        // 그 다음 랜덤 질문 뽑기
-        OnDisplayQuestion();        // 마지막으로 UI 표시
-        ScoerKeeper.IncrementquestionSeen();
-        progressber.value++;
+        SetDefaultButtonSprites();
+        GetRandomQuestion();
+        OnDisplayQuestion();
+        scoreKeeper.IncrementquestionSeen();
+        progressBar.value++;
     }
 
     private void GetRandomQuestion()
@@ -128,12 +146,7 @@ public class Quiz : MonoBehaviour
         DisplaySolution(index);
 
         timer.CancelTimer();
-        scoerText.text = $"Scoer:   {ScoerKeeper.CalculateScore()} %";
-
-        /* if (progressber.value == progressber.maxValue)
-         {
-             isComplete = true;
-         }*/
+        scoreText.text = $"Score: {scoreKeeper.CalculateScore()} %";
     }
 
     private void DisplaySolution(int index)
@@ -142,7 +155,7 @@ public class Quiz : MonoBehaviour
         {
             questionText.text = "정답입니다.";
             answerButtons[index].GetComponent<Image>().sprite = correctAnswerSprite;
-            ScoerKeeper.IncrementCurrectAnswer();
+            scoreKeeper.IncrementCurrectAnswer();
         }
         else
         {

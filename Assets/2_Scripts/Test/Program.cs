@@ -13,12 +13,13 @@ public class Program : MonoBehaviour
 
         Debug.Log("작업 완료!");
     }
+    
+    
 
     void ResultProcess(string msg)
     {
         Debug.Log("수신한 메시지: " + msg);
     }
-
 }
 
 public class Publisher

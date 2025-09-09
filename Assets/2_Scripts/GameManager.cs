@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Quiz quiz;
     [SerializeField] private EndScreen endScreen;
+    [SerializeField] private GameObject loadingCanvas;
 
     private void Awake()
     {
@@ -25,16 +26,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ShowQuizScene();
+        //ShowQuizScene();
     }
 
     /// <summary>
     /// 퀴즈 화면을 보여주는 함수
     /// </summary>
-    private void ShowQuizScene()
+    public void ShowQuizScene()
     {
         quiz.gameObject.SetActive(true);
         endScreen.gameObject.SetActive(false);
+        loadingCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -45,6 +47,14 @@ public class GameManager : MonoBehaviour
         quiz.gameObject.SetActive(false);
         endScreen.gameObject.SetActive(true);
         endScreen.ShowFinalScore();
+        loadingCanvas.SetActive(false);
+    }
+
+    public void ShowLoadingScreen()
+    {
+        quiz.gameObject.SetActive(false);
+        endScreen.gameObject.SetActive(false);
+        loadingCanvas.SetActive(true);
     }
 
     /// <summary>
