@@ -31,12 +31,17 @@ public class Quiz : MonoBehaviour
     [Header("바")]
     [SerializeField] Slider progressBar;
 
+    [Header("ChteatGPT")]
+    [SerializeField] ChatGPTClient ChatGPTClient;
+    [SerializeField] int questionCount = 3;
+
     bool isGeneratingQuestions = false;
 
     void Start()
     {
         timer = FindFirstObjectByType<Timer>();
         scoreKeeper = FindFirstObjectByType<ScoerKeeper>();
+        ChatGPTClient.quizGenerateHandler += QuizGeneratedHandler;
 
         if (questions.Count == 0)
         {
@@ -51,8 +56,25 @@ public class Quiz : MonoBehaviour
     private void GenerateQuestionsIfNeeded()
     {
         if (isGeneratingQuestions) return;
+
         isGeneratingQuestions = true;
         GameManager.Instance.ShowLoadingScreen();
+        string toltipcUse = GetTrendingTooltip();
+        ChatGPTClient.GenerateQuestions(questionCount, toltipcUse);
+        Debug.Log($"GenerateQuestionsIfNeeded : {toltipcUse}");
+    }
+
+    private static string GetTrendingTooltip()
+    {
+        string[] topics = new string[] { "최신 IT 기술", "인기 있는 게임", "최근 개봉한 영화", "유명한 역사적 사건", "세계적인 스포츠 이벤트" };
+        int randomIndex = Random.Range(0, topics.Length); // Fixed typo: changed 'randamidax' to 'randomIndex' and corrected syntax for Random.Range
+        return topics[randomIndex];
+    }
+
+    void QuizGeneratedHandler(List<QuestionSo> questions)
+    {
+        Debug.Log($"QuizGeneratedHandler : {questions.Count} questions recived.");
+        isGeneratingQuestions = false;
     }
 
     private void InitializeProgressBar()

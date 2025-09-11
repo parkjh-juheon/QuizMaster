@@ -253,6 +253,8 @@ MonoBehaviour:
   solutionTimerSprite: {fileID: 801340330791846111, guid: 5f124cce360f2364f8fc14dfab1ed464, type: 3}
   scoreText: {fileID: 1459148356}
   progressBar: {fileID: 1469375285}
+  ChatGPTClient: {fileID: 910799396}
+  questionCount: 3
 --- !u!1001 &115647282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,6 +1055,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905825992}
   m_CullTransparentMesh: 1
+--- !u!1 &910799395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910799397}
+  - component: {fileID: 910799396}
+  m_Layer: 0
+  m_Name: ChatGPTClient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &910799396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910799395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69fecf25661d13f408f903c446201ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &910799397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910799395}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 681.7515, y: 366.1981, z: 3.3938622}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &938455476 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 22400006, guid: 75c4353c4b4125549b782a72884bedd4, type: 3}
@@ -3459,3 +3505,4 @@ SceneRoots:
   - {fileID: 1308039742}
   - {fileID: 456412789}
   - {fileID: 1656448384}
+  - {fileID: 910799397}
