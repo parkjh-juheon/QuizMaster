@@ -5,14 +5,14 @@ using UnityEngine;
 public class QuestionSo : ScriptableObject
 {
     [TextArea(2, 6)]
-    [SerializeField] string questionText = "여기에 질문을 적어주세요";
+    [SerializeField] string question = "여기에 질문을 적어주세요";
     [SerializeField] string[] answers = new string[4];
     [SerializeField] int correctAnswerIndex = 0;
 
 
     public string GetQuestion()
     {
-        return questionText;
+        return question;
     }
     
     public string GetCorrectAnswer()
@@ -31,7 +31,7 @@ public class QuestionSo : ScriptableObject
 
     public void SetData(string q, string[] a, int correctIndex)
     {
-        questionText = q;
+        question = q;
         answers = a;
         correctAnswerIndex = correctIndex;
     }

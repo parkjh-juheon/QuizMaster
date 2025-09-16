@@ -255,6 +255,7 @@ MonoBehaviour:
   progressBar: {fileID: 1469375285}
   ChatGPTClient: {fileID: 910799396}
   questionCount: 3
+  LoadingText: {fileID: 1148045410}
 --- !u!1001 &115647282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,6 +267,10 @@ PrefabInstance:
     - target: {fileID: 100006, guid: 75c4353c4b4125549b782a72884bedd4, type: 3}
       propertyPath: m_Name
       value: Bars 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 75c4353c4b4125549b782a72884bedd4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22400006, guid: 75c4353c4b4125549b782a72884bedd4, type: 3}
       propertyPath: m_Pivot.x

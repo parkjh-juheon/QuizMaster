@@ -34,6 +34,7 @@ public class Quiz : MonoBehaviour
     [Header("ChteatGPT")]
     [SerializeField] ChatGPTClient ChatGPTClient;
     [SerializeField] int questionCount = 3;
+    [SerializeField] TextMeshProUGUI LoadingText;
 
     bool isGeneratingQuestions = false;
 
@@ -71,10 +72,21 @@ public class Quiz : MonoBehaviour
         return topics[randomIndex];
     }
 
-    void QuizGeneratedHandler(List<QuestionSo> questions)
+    void QuizGeneratedHandler(List<QuestionSo> generateQuestions)
     {
-        Debug.Log($"QuizGeneratedHandler : {questions.Count} questions recived.");
+        Debug.Log($"QuizGeneratedHandler : {generateQuestions.Count} questions recived.");
         isGeneratingQuestions = false;
+
+        if (generateQuestions == null || generateQuestions.Count == 0)
+        {
+            Debug.LogError("질문이 생성되지 않았습니다. ");
+            LoadingText.text = "질문 생성에 실패했습니다. 다시 시도해주세요.";
+            return;
+        }
+        this.questions.AddRange(generateQuestions);
+        progressBar.maxValue += generateQuestions.Count;
+
+        GetNextQuestion();
     }
 
     private void InitializeProgressBar()
@@ -107,7 +119,7 @@ public class Quiz : MonoBehaviour
             }
             else
             {
-                timer.loadNextQuestion = false;
+                //timer.loadNextQuestion = false;
                 GetNextQuestion();
             }
         }
@@ -121,6 +133,8 @@ public class Quiz : MonoBehaviour
 
     private void GetNextQuestion()
     {
+        timer.loadNextQuestion = false;
+
         if (questions.Count <= 0)
         {
             Debug.Log("더이상 질문이 없습니다.");
