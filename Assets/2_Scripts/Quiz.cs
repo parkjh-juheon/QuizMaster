@@ -7,8 +7,9 @@ public class Quiz : MonoBehaviour
 {
     [Header("질문")]
     [SerializeField] TextMeshProUGUI questionText;
-    [SerializeField] List<QuestionSo> questions = new List<QuestionSo>();
-    QuestionSo currentQuestion;
+    [SerializeField] TextMeshProUGUI hintText;
+    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    QuestionSO currentQuestion;
 
     [Header("보기")]
     [SerializeField] GameObject[] answerButtons;
@@ -61,7 +62,7 @@ public class Quiz : MonoBehaviour
         isGeneratingQuestions = true;
         GameManager.Instance.ShowLoadingScreen();
         string toltipcUse = GetTrendingTooltip();
-        ChatGPTClient.GenerateQuestions(questionCount, toltipcUse);
+        ChatGPTClient.GenerateQuizQuestions(questionCount, toltipcUse);
         Debug.Log($"GenerateQuestionsIfNeeded : {toltipcUse}");
     }
 
@@ -72,7 +73,7 @@ public class Quiz : MonoBehaviour
         return topics[randomIndex];
     }
 
-    void QuizGeneratedHandler(List<QuestionSo> generateQuestions)
+    void QuizGeneratedHandler(List<QuestionSO> generateQuestions)
     {
         Debug.Log($"QuizGeneratedHandler : {generateQuestions.Count} questions recived.");
         isGeneratingQuestions = false;
@@ -169,6 +170,7 @@ public class Quiz : MonoBehaviour
     private void OnDisplayQuestion()
     {
         questionText.text = currentQuestion.GetQuestion();
+        hintText.text = "힌트: " + currentQuestion.hint;
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
